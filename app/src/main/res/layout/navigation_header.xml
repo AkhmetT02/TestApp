@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
     android:gravity="bottom"
-    android:background="@color/design_default_color_primary">
+    android:background="@color/colorPrimaryVariant">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"

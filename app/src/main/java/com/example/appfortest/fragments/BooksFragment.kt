@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.appfortest.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+//ParentFragment
 class BooksFragment : Fragment() {
 
     private lateinit var bottomNavigationView: BottomNavigationView
