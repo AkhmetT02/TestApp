@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_downloaded_books"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/empty_books_downloaded_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Books not found :("
+        android:textSize="30dp"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

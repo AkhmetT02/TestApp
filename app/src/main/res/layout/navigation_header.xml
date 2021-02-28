@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:gravity="bottom"
+    android:background="@color/design_default_color_primary">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:src="@drawable/user_photo"/>
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="Akhmet Tynymbay"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="axmet.messi@gmail.com"/>
+
+</LinearLayout>

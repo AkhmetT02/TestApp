@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/poster_item"
+        android:layout_width="180dp"
+        android:layout_height="200dp"
+        app:cardCornerRadius="20dp">
+
+        <ImageView
+            android:id="@+id/image_poster_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:alpha="0.7"
+            android:background="@color/black"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name_poster_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="title"
+                android:textColor="@color/white"
+                android:padding="4dp"/>
+
+            <TextView
+                android:id="@+id/genre_poster_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="genre"
+                android:textColor="@color/white"
+                android:padding="4dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
