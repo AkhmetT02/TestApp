@@ -50,11 +50,9 @@ class BooksMenuFragment : MvpAppCompatFragment(), BooksMenuView {
         adapter.setOnBookClickListener(object: BooksAdapter.OnBookClickListener {
             override fun onBookClick(position: Int) {
                 Log.e("TAG", "onBookClick: CLICKED")
-                val fragment = BookInfoFragment(adapter.books[position])
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.books_fragment_container, fragment)
-                    .addToBackStack("null")
-                    .commit()
+                val bundle = Bundle()
+                bundle.putParcelable("book", adapter.books[position])
+                findNavController().navigate(R.id.action_booksMenuFragment_to_bookInfoFragment, bundle)
             }
         })
 

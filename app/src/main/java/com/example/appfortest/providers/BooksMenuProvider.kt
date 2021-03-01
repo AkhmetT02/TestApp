@@ -16,7 +16,7 @@ class BooksMenuProvider(private val presenter: BooksMenuPresenter) {
 
     fun loadBooks() {
         App().getAppComponent().inject(this)
-        mService.getBooks(query = "dante", apiKey = "AIzaSyDXv_Q77u8jbPmVZIPILQN4OCPLSNLGX0M").enqueue(object: Callback<Result> {
+        mService.getBooks(query = "marvel", apiKey = "AIzaSyDXv_Q77u8jbPmVZIPILQN4OCPLSNLGX0M").enqueue(object: Callback<Result> {
             override fun onFailure(call: Call<Result>, t: Throwable) {
                 if (t.message != null) {
                     presenter.showError(t.message!!)

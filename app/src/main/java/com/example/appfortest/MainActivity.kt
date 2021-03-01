@@ -3,6 +3,7 @@ package com.example.appfortest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.webkit.DownloadListener
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -14,6 +15,9 @@ import androidx.fragment.app.replace
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.example.appfortest.fragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -21,52 +25,63 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawer: DrawerLayout
-    private lateinit var toolbar: Toolbar
     private lateinit var navigationView: NavigationView
+    private lateinit var bottomNavigation: BottomNavigationView
+
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(findViewById(R.id.toolbar))
+
         drawer = findViewById(R.id.drawer_layout)
-        toolbar = findViewById(R.id.main_toolbar)
         navigationView = findViewById(R.id.navigation_view)
+        bottomNavigation = findViewById(R.id.bottom_navigation_main)
+
+        navController = findNavController(R.id.main_nav_host)
+        bottomNavigation.setupWithNavController(navController)
 
 
-        setSupportActionBar(toolbar)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.booksMenuFragment,
+                R.id.downloadedFragment,
+                R.id.favouriteFragment,
+                R.id.settingsFragment,
+                R.id.sendFragment), drawer)
 
-        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close)
-        drawer.addDrawerListener(toggle)
-        toggle.syncState()
 
-
-        navigationView.setNavigationItemSelectedListener {
-            var fragment: Fragment? = null
-            when(it.itemId) {
-                R.id.nav_books -> fragment = BooksFragment()
-                R.id.nav_settings -> fragment = SettingsFragment()
-                R.id.nav_send -> fragment = SendFragment()
+        //When fragment changed
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.settingsFragment -> hideBottomNavigation()
+                R.id.sendFragment -> hideBottomNavigation()
+                else -> showBottomNavigation()
             }
-            if (fragment != null) {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment).commit()
-            }
-            drawer.closeDrawer(GravityCompat.START)
-            return@setNavigationItemSelectedListener true
         }
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BooksFragment()).commit()
+        //Setup UI with navigationView, navController and appBar
+        NavigationUI.setupWithNavController(navigationView, navController)
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
 
-        supportFragmentManager.addOnBackStackChangedListener {
-            Log.e("TAG", "onCreate: ")
-        }
+    }
+
+    private fun hideBottomNavigation() {
+        bottomNavigation.visibility = View.INVISIBLE
+    }
+
+    private fun showBottomNavigation() {
+        bottomNavigation.visibility = View.VISIBLE
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
 
     override fun onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
-        } else if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
         } else {
             super.onBackPressed()
         }

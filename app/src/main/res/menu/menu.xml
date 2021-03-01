@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/bottom_books"
+    <item android:id="@+id/booksMenuFragment"
         android:title="Books"
         android:icon="@drawable/ic_books_menu"/>
-    <item android:id="@+id/bottom_downloaded"
+    <item android:id="@+id/downloadedFragment"
         android:title="Downloaded"
         android:icon="@drawable/ic_downloaded"/>
-    <item android:id="@+id/bottom_favourite"
+    <item android:id="@+id/favouriteFragment"
         android:title="Favourite"
         android:icon="@drawable/ic_favorite"/>
 

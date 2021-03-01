@@ -19,7 +19,7 @@ import com.example.appfortest.database.BooksDatabaseViewModel
 import com.example.appfortest.models.BookModel
 import com.squareup.picasso.Picasso
 
-class BookInfoFragment(private val book: BookModel) : Fragment() {
+class BookInfoFragment : Fragment() {
 
     private lateinit var image: ImageView
     private lateinit var title: TextView
@@ -42,13 +42,15 @@ class BookInfoFragment(private val book: BookModel) : Fragment() {
 
         viewModel = ViewModelProvider(this).get(BooksDatabaseViewModel::class.java)
 
-        Picasso.get().load(book.imageLinks?.thumbnail).into(image)
-        title.text = book.title
-        description.text = book.description
+        val book = arguments?.getParcelable<BookModel>("book")
+
+        Picasso.get().load(book?.imageLinks?.thumbnail).into(image)
+        title.text = book?.title
+        description.text = book?.description
 
         viewModel.allBooks.observe(viewLifecycleOwner, Observer {
             it.forEach {
-                if (it.title == book.title) {
+                if (it.title == book?.title) {
                     if (it.favourite) {
                         addToFavouriteBtn.text = "Remove from favourite"
                         isFavourite = true
@@ -68,22 +70,22 @@ class BookInfoFragment(private val book: BookModel) : Fragment() {
         addToFavouriteBtn.setOnClickListener {
             if (exist) {
                 if (isFavourite) {
-                    viewModel.updateFavouriteBook(false, book.title)
+                    viewModel.updateFavouriteBook(false, book?.title!!)
                 } else {
-                    viewModel.updateFavouriteBook(true, book.title)
+                    viewModel.updateFavouriteBook(true, book?.title!!)
                 }
             } else {
-                book.favourite = true
-                viewModel.insertBook(book)
+                book?.favourite = true
+                viewModel.insertBook(book!!)
             }
 
         }
         downloadBtn.setOnClickListener {
             if (exist) {
-                viewModel.updateDownloadedBook(true, book.title)
+                viewModel.updateDownloadedBook(true, book?.title!!)
             } else {
-                book.downloaded = true
-                viewModel.insertBook(book)
+                book?.downloaded = true
+                viewModel.insertBook(book!!)
             }
         }
 

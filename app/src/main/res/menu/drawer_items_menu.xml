@@ -5,17 +5,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_books"
+            android:id="@+id/booksMenuFragment"
             android:icon="@drawable/ic_book"
             android:title="Q-Books" />
     </group>
 
     <item android:title="Communicate" >
         <menu>
-            <item android:id="@+id/nav_settings"
+            <item android:id="@+id/settingsFragment"
                 android:icon="@drawable/ic_settings"
                 android:title="Settings"/>
-            <item android:id="@+id/nav_send"
+            <item android:id="@+id/sendFragment"
                 android:icon="@drawable/ic_send"
                 android:title="Send"/>
         </menu>

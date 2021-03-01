@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/booksMenuFragment">
+
+    <fragment
+        android:id="@+id/bookInfoFragment"
+        android:name="com.example.appfortest.fragments.BookInfoFragment"
+        android:label="Book Info" />
+    <fragment
+        android:id="@+id/booksMenuFragment"
+        android:name="com.example.appfortest.fragments.BooksMenuFragment"
+        android:label="Books">
+        <action
+            android:id="@+id/action_booksMenuFragment_to_bookInfoFragment"
+            app:destination="@id/bookInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/downloadedFragment"
+        android:name="com.example.appfortest.fragments.DownloadedFragment"
+        android:label="Downloaded" />
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.appfortest.fragments.FavouriteFragment"
+        android:label="Favourite" />
+    <fragment
+        android:id="@+id/sendFragment"
+        android:name="com.example.appfortest.fragments.SendFragment"
+        android:label="Send" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.appfortest.fragments.SettingsFragment"
+        android:label="Settings" />
+</navigation>

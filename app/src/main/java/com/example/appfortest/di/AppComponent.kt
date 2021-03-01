@@ -1,7 +1,6 @@
 package com.example.appfortest.di
 
 import com.example.appfortest.di.modules.*
-import com.example.appfortest.fragments.BooksFragment
 import com.example.appfortest.fragments.BooksMenuFragment
 import com.example.appfortest.fragments.DownloadedFragment
 import com.example.appfortest.fragments.FavouriteFragment

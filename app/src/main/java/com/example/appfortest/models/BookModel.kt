@@ -6,9 +6,11 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.appfortest.database.converters.ImageLinksConverter
 import com.example.appfortest.database.converters.StringListConverter
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "books")
 @TypeConverters(value = [ImageLinksConverter::class, StringListConverter::class])
+@Parcelize
 data class BookModel(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val allowAnonLogging: Boolean?,
@@ -30,7 +32,7 @@ data class BookModel(
     val title: String = "",
     var downloaded: Boolean = false,
     var favourite: Boolean = false
-) {
+) : Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
