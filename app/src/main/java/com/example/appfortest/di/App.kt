@@ -4,8 +4,6 @@ import android.app.Application
 import androidx.fragment.app.Fragment
 import com.example.appfortest.di.modules.AppModule
 import com.example.appfortest.di.modules.FragmentModule
-import com.example.appfortest.fragments.BooksMenuFragment
-import javax.inject.Inject
 
 class App() : Application() {
 

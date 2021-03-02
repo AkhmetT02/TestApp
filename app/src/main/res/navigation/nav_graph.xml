@@ -9,7 +9,7 @@
         android:label="Book Info" />
     <fragment
         android:id="@+id/booksMenuFragment"
-        android:name="com.example.appfortest.fragments.BooksMenuFragment"
+        android:name="com.example.appfortest.fragments.ui.book_menu.BooksMenuFragment"
         android:label="Books">
         <action
             android:id="@+id/action_booksMenuFragment_to_bookInfoFragment"
@@ -17,11 +17,11 @@
     </fragment>
     <fragment
         android:id="@+id/downloadedFragment"
-        android:name="com.example.appfortest.fragments.DownloadedFragment"
+        android:name="com.example.appfortest.fragments.ui.DownloadedFragment"
         android:label="Downloaded" />
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.example.appfortest.fragments.FavouriteFragment"
+        android:name="com.example.appfortest.fragments.ui.FavouriteFragment"
         android:label="Favourite" />
     <fragment
         android:id="@+id/sendFragment"

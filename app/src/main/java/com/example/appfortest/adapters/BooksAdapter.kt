@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appfortest.R
-import com.example.appfortest.fragments.BooksMenuFragment
-import com.example.appfortest.fragments.DownloadedFragment
+import com.example.appfortest.fragments.ui.book_menu.BooksMenuFragment
+import com.example.appfortest.fragments.ui.DownloadedFragment
 import com.example.appfortest.models.BookModel
 import com.squareup.picasso.Picasso
 

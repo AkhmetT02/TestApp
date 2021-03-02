@@ -1,10 +1,9 @@
 package com.example.appfortest.di
 
 import com.example.appfortest.di.modules.*
-import com.example.appfortest.fragments.BooksMenuFragment
-import com.example.appfortest.fragments.DownloadedFragment
-import com.example.appfortest.fragments.FavouriteFragment
-import com.example.appfortest.network.RetrofitService
+import com.example.appfortest.fragments.ui.book_menu.BooksMenuFragment
+import com.example.appfortest.fragments.ui.DownloadedFragment
+import com.example.appfortest.fragments.ui.FavouriteFragment
 import com.example.appfortest.providers.BooksMenuProvider
 import dagger.Component
 

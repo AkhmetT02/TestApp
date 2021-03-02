@@ -1,4 +1,4 @@
-package com.example.appfortest.fragments
+package com.example.appfortest.fragments.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appfortest.R
@@ -19,10 +19,9 @@ import com.example.appfortest.di.modules.AppModule
 import com.example.appfortest.di.modules.FragmentModule
 import javax.inject.Inject
 
-class FavouriteFragment : Fragment() {
+class DownloadedFragment : Fragment() {
 
-    @Inject
-    lateinit var adapter: BooksAdapter
+    @Inject lateinit var adapter: BooksAdapter
 
     private lateinit var recyclerBooks: RecyclerView
     private lateinit var emptyBooksTv: TextView
@@ -30,21 +29,19 @@ class FavouriteFragment : Fragment() {
     private lateinit var viewModel: BooksDatabaseViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.fragment_favourite, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_downloaded, container, false)
 
-        DaggerAppComponent.builder().appModule(AppModule(activity?.applicationContext!!)).fragmentModule(
-            FragmentModule(fragment = this)
-        ).build().inject(this)
+        DaggerAppComponent.builder().appModule(AppModule(activity?.applicationContext!!)).fragmentModule(FragmentModule(fragment = this)).build().inject(this)
 
         viewModel = ViewModelProvider(this).get(BooksDatabaseViewModel::class.java)
 
-        recyclerBooks = view.findViewById(R.id.recycler_favourite_books)
-        emptyBooksTv = view.findViewById(R.id.empty_books_favourite_tv)
+        recyclerBooks = view.findViewById(R.id.recycler_downloaded_books)
+        emptyBooksTv = view.findViewById(R.id.empty_books_downloaded_tv)
 
-        recyclerBooks.layoutManager = GridLayoutManager(context, 2)
+        recyclerBooks.layoutManager = LinearLayoutManager(context)
         recyclerBooks.adapter = adapter
 
-        viewModel.favouriteBooks.observe(viewLifecycleOwner, Observer {
+        viewModel.downloadedBooks.observe(viewLifecycleOwner, Observer {
             if (it.isEmpty()) {
                 emptyBooksTv.visibility = View.VISIBLE
             } else {
@@ -52,6 +49,7 @@ class FavouriteFragment : Fragment() {
             }
             adapter.setupBooks(it)
         })
+
 
         return view
     }

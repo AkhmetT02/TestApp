@@ -1,4 +1,4 @@
-package com.example.appfortest.fragments
+package com.example.appfortest.fragments.ui.book_menu
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.replace
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -29,6 +33,7 @@ class BooksMenuFragment : MvpAppCompatFragment(), BooksMenuView {
 
     @Inject lateinit var adapter: BooksAdapter
     @InjectPresenter lateinit var presenter: BooksMenuPresenter
+    private lateinit var booksViewModel: BookMenuViewModel
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var emptyBooksTv: TextView
@@ -39,6 +44,7 @@ class BooksMenuFragment : MvpAppCompatFragment(), BooksMenuView {
         val view: View = inflater.inflate(R.layout.fragment_books_menu, container, false)
         DaggerAppComponent.builder().appModule(AppModule(activity?.applicationContext!!)).fragmentModule(FragmentModule(fragment = this)).build().inject(this)
 
+        booksViewModel = ViewModelProvider(activity as ViewModelStoreOwner).get(BookMenuViewModel::class.java)
 
         recyclerView = view.findViewById(R.id.recycler_books_menu)
         emptyBooksTv = view.findViewById(R.id.empty_books_menu_tv)
@@ -56,14 +62,33 @@ class BooksMenuFragment : MvpAppCompatFragment(), BooksMenuView {
             }
         })
 
-        presenter.loadBooks()
+
+        booksViewModel.getBooks.observe(viewLifecycleOwner, Observer {
+            if (it.isEmpty()) {
+                presenter.loadBooks()
+                Log.e("TAG", "onCreateView: ${it.size}")
+            } else {
+                setupBooksWithoutInternet(it)
+                Log.e("TAG", "onCreateViewElse: ${it.size}")
+            }
+            Log.e("TAG", "onCreateViewQQQ: ")
+        })
+
+        if (booksViewModel.getBooks.value == null) {
+            presenter.loadBooks()
+        }
         return view
+    }
+
+    private fun setupBooksWithoutInternet(books: List<BookModel>) {
+        adapter.setupBooks(books = books)
     }
 
     override fun setupBooks(books: List<BookModel>) {
         recyclerView.visibility = View.VISIBLE
         emptyBooksTv.visibility = View.INVISIBLE
         adapter.setupBooks(books = books)
+        booksViewModel.addBooks(books = books)
     }
 
     override fun setupEmptyBooks() {
